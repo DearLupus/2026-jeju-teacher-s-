@@ -214,6 +214,37 @@
 
   h3.sec{font-size:12.5px; font-family:var(--mono); color:var(--ink); letter-spacing:.02em; margin:18px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line);}
   h3.sec:first-child{margin-top:0;}
+
+  /* 🍊 이스터에그 */
+  .tangerine-egg{
+    position:fixed; right:14px; bottom:14px; font-size:22px; opacity:.3; cursor:pointer;
+    z-index:200; user-select:none; transition:transform .25s ease, opacity .25s ease;
+    filter:grayscale(.4);
+  }
+  .tangerine-egg:hover{opacity:1; transform:scale(1.25) rotate(-8deg); filter:none;}
+  .tangerine-egg:active{transform:scale(.9) rotate(8deg);}
+  .egg-overlay{
+    position:fixed; inset:0; background:rgba(20,16,10,.55); z-index:300;
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .egg-overlay.show{display:flex;}
+  .egg-card{
+    background:var(--paper); border-radius:16px; max-width:320px; width:100%;
+    padding:22px 20px; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,.3);
+    animation:eggPop .35s ease;
+  }
+  @keyframes eggPop{from{transform:scale(.85); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .egg-card .egg-emoji{font-size:40px; margin-bottom:6px;}
+  .egg-card h3{margin:0 0 8px; font-size:15px; color:var(--ink);}
+  .egg-card p{margin:0 0 4px; font-size:12.5px; color:var(--muted); line-height:1.7;}
+  .egg-card .egg-stamp{
+    font-family:var(--mono); font-size:11px; color:var(--teal); margin-top:10px;
+    border-top:1px dashed var(--line); padding-top:10px;
+  }
+  .egg-card button{
+    margin-top:14px; background:var(--basalt); color:#fff; border:none; border-radius:8px;
+    padding:9px 18px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:var(--sans);
+  }
 </style>
 </head>
 <body>
@@ -521,17 +552,16 @@ const buses = [
   {no:"3호차", classes:"6·7·5반", detail:"6반11 · 7반15 · 5반5 = 31명", teacher:"조민규, 조희철", extra:"보조탑승자: 교사요원·안전요원", total:"35명"}
 ];
 
-// 객실 타입 요약 (숙소 공식 배정 기준)
+// 객실 타입 요약 (파크선샤인 제주 확정 예약서 기준, 2026.09.14 최종본)
 const roomTypes = [
- {type:"SPT", qty:14, guests:28, note:"3층(남학생·남교사), 4층(남교사)"},
- {type:"SPD", qty:21, guests:42, note:"3층(남학생), 4층(남교사)"},
- {type:"PTW", qty:10, guests:26, note:"2층(여교사·여학생)"},
- {type:"PTS", qty:3, guests:9, note:"3층(남학생·남교사)"},
- {type:"HSS", qty:1, guests:3, note:"3층(남학생·남교사)"}
+ {type:"PTW", qty:10, guests:23, note:"더블1+싱글1"},
+ {type:"PTS", qty:3, guests:10, note:"더블2"},
+ {type:"HSS", qty:1, guests:3, note:"더블2 (전체 중 유일)"},
+ {type:"SPT", qty:15, guests:30, note:"싱글2"},
+ {type:"SPD", qty:20, guests:36, note:"더블1"}
 ];
 
-// 실제 숙소 객실 배정표 (학교 제공 이미지 기준, 2026.09 확정본)
-// 교사 객실 배정 (기안용 문서 확인)
+// 교사 객실 배정 (예약서 확인)
 const teacherRooms = [
  {roomNo:"234", teacher:"최준건 (교감)"},
  {roomNo:"235", teacher:"김성수 (교사 안전요원)"},
@@ -544,7 +574,9 @@ const teacherRooms = [
  {roomNo:"441", teacher:"정승민 (3반 담임)"}
 ];
 
-// 학생 방배정 — 최신 게시용/기안용 문서 기준 재구성(93명 전원 배정 확인됨: 아래 인원 합계가 93명과 정확히 일치)
+// 학생 방배정 — 파크선샤인 제주 확정 예약서 기준 (2026.09.14 최종 수정본)
+// ※ 318호(이태윤 외)→232호, 319호(박지후(4반) 외)→233호, 320호(장민준 외)→318호로 재배정됨
+// 총 93명 전원 배정 확인됨(아래 인원 합계가 93명과 정확히 일치)
 const roomExamples = [
  {roomNo:"237", floor:"2층", members:["김주영","윤혜림","이예빈"]},
  {roomNo:"238", floor:"2층", members:["김하윤①","최채은","차은혜"]},
@@ -554,6 +586,8 @@ const roomExamples = [
  {roomNo:"242", floor:"2층", members:["이나래","배소영"]},
  {roomNo:"243", floor:"2층", members:["강여진","임정민","김하윤②"]},
  {roomNo:"245", floor:"2층", members:["이희연","최은혜","하유정","정하은"]},
+ {roomNo:"232", floor:"2층", members:["이태윤","황슬우","김민수"]},
+ {roomNo:"233", floor:"2층", members:["박지후(4반)","최우진","이승범"]},
  {roomNo:"311", floor:"3층", members:["김민승","박준우","양정모"]},
  {roomNo:"312", floor:"3층", members:["구민우","이재웅"]},
  {roomNo:"313", floor:"3층", members:["박지민","이동규"]},
@@ -561,9 +595,7 @@ const roomExamples = [
  {roomNo:"315", floor:"3층", members:["박영규","정지훈"]},
  {roomNo:"316", floor:"3층", members:["이한빈","최예성"]},
  {roomNo:"317", floor:"3층", members:["이지훈","조상민"]},
- {roomNo:"318", floor:"3층", members:["이태윤","황슬우","김민수"]},
- {roomNo:"319", floor:"3층", members:["박지후(4반)","최우진","이승범"]},
- {roomNo:"320", floor:"3층", members:["장민준","박지훈"]},
+ {roomNo:"318", floor:"3층", members:["장민준","박지훈"]},
  {roomNo:"321", floor:"3층", members:["김강휘","안태환"]},
  {roomNo:"322", floor:"3층", members:["장욱진","황명석"]},
  {roomNo:"323", floor:"3층", members:["심재민","김재윤"]},
@@ -590,8 +622,8 @@ const roomExamples = [
 
 // 숙소 배치도 (파크선샤인 제주 층별 요약)
 const floors = [
- {name:"2F · GARDEN / OCEAN", rooms:["220","219","218","217","216","215","214","213","212","211","234","235","236","237","238","239","240","241","242","243","245"], assigned:["237","238","239","240","241","242","243","245"]},
- {name:"3F · MOUNTAIN / OCEAN", rooms:["320","319","318","317","316","315","314","313","312","311","321","322","323","324","325","326","327","331","332","333","334","335","336","337","338","339","340","341","342","343","345"], assigned:["311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","333","334","335","336","337","338","339","340","341","342","343","345"]},
+ {name:"2F · GARDEN / OCEAN", rooms:["220","219","218","217","216","215","214","213","212","211","232","233","234","235","236","237","238","239","240","241","242","243","245"], assigned:["232","233","237","238","239","240","241","242","243","245"]},
+ {name:"3F · MOUNTAIN / OCEAN", rooms:["320","319","318","317","316","315","314","313","312","311","321","322","323","324","325","326","327","331","332","333","334","335","336","337","338","339","340","341","342","343","345"], assigned:["311","312","313","314","315","316","317","318","321","322","323","324","325","326","327","333","334","335","336","337","338","339","340","341","342","343","345"]},
  {name:"4F · MOUNTAIN / OCEAN", rooms:["420","419","418","417","416","415","414","413","412","411","421","422","423","424","425","426","427","431","432","433","434","435","436","437","438","439","440","441","442","443","445"], assigned:["442","443","445"]}
 ];
 
@@ -1054,6 +1086,38 @@ function attachSearch(id){
 }
 
 showTab('students');
+
+/* 🍊 이스터에그 — 배포 테스트용 */
+const EGG_VERSION = "2026-09-14 · 파크선샤인 최종 객실배정 반영";
+const eggMessages = [
+  "제주 감귤은 껍질이 얇을수록 달아요 🍊",
+  "9.81파크의 9.81은 중력가속도(m/s²)에서 따왔대요",
+  "성산일출봉은 마그마가 바닷물을 만나 생긴 수성화산이에요",
+  "이 페이지가 뜬다면 GitHub → Netlify 자동배포가 잘 작동 중이라는 뜻이에요!",
+  "제주 방언으로 '폭낭'은 팽나무를 뜻해요"
+];
+const egg = document.createElement('div');
+egg.className = 'tangerine-egg';
+egg.textContent = '🍊';
+egg.title = '';
+document.body.appendChild(egg);
+
+const eggOverlay = document.createElement('div');
+eggOverlay.className = 'egg-overlay';
+eggOverlay.innerHTML = `<div class="egg-card">
+  <div class="egg-emoji">🍊</div>
+  <h3>감귤을 찾으셨네요!</h3>
+  <p id="eggFact"></p>
+  <div class="egg-stamp">DEPLOY CHECK · ${EGG_VERSION}</div>
+  <button onclick="document.querySelector('.egg-overlay').classList.remove('show')">닫기</button>
+</div>`;
+document.body.appendChild(eggOverlay);
+
+egg.addEventListener('click', ()=>{
+  document.getElementById('eggFact').textContent = eggMessages[Math.floor(Math.random()*eggMessages.length)];
+  eggOverlay.classList.add('show');
+});
+eggOverlay.addEventListener('click', (e)=>{ if(e.target===eggOverlay) eggOverlay.classList.remove('show'); });
 </script>
 </body>
 </html>
