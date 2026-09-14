@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>부산디지털고 2학년 · 제주 현장체험학습 탑승권</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --basalt:#161a1f; --basalt2:#20262e; --basalt3:#2b323c;
+    --tangerine:#ff7a3d; --tangerine-deep:#e35f22;
+    --teal:#0e8391; --gold:#e3a92b; --danger:#d1483a;
+    --sand:#f6f1e6; --paper:#fffdf8;
+    --ink:#20242b; --muted:#797065; --line:#e6ddc9;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'Pretendard',-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:var(--sans); background:var(--sand); color:var(--ink); overflow-x:hidden;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  header{
+    background:
+      radial-gradient(circle at 12% -10%, #333d4a 0%, transparent 45%),
+      linear-gradient(155deg,var(--basalt2),var(--basalt) 70%);
+    color:#f3efe6; padding:20px 18px 16px; position:relative;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.18em; color:var(--tangerine);
+    font-weight:700; display:flex; align-items:center; gap:7px; margin-bottom:8px;
+  }
+  .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--tangerine);}
+  header h1{margin:0; font-size:18px; line-height:1.4; font-weight:800; letter-spacing:-.2px;}
+  .pass-meta{
+    display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:12px;
+    font-family:var(--mono); font-size:11px; color:#c7c0b3;
+  }
+  .pass-meta b{color:#f3efe6; font-weight:600;}
+  .pass-route{
+    margin-top:14px; display:flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-size:15px; font-weight:700; color:#f3efe6;
+  }
+  .pass-route .city{letter-spacing:.03em;}
+  .pass-route .plane{color:var(--tangerine); font-size:13px;}
+  .pass-route .line{flex:1; height:1px; background:repeating-linear-gradient(to right,#4a5261 0 5px, transparent 5px 9px); position:relative;}
+
+  .tear{
+    height:14px; background-color:var(--basalt);
+    background-image: radial-gradient(circle 7px, var(--sand) 99%, transparent 100%);
+    background-size:18px 18px; background-position:-5px -9px; background-repeat:repeat-x;
+  }
+
+  nav{
+    display:flex; overflow-x:auto; background:var(--basalt); padding:0 4px 6px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none; position:sticky; top:0; z-index:50;
+    border-bottom:1px solid #000;
+  }
+  nav::-webkit-scrollbar{display:none;}
+  nav button{
+    flex:0 0 auto; background:none; border:none; color:#8b93a3; padding:10px 12px 8px;
+    font-size:12.5px; font-weight:600; white-space:nowrap; cursor:pointer;
+    border-bottom:2.5px solid transparent; display:flex; align-items:baseline; gap:6px;
+  }
+  nav button .tab-no{font-family:var(--mono); font-size:10px; color:#5c6474; font-weight:700;}
+  nav button.active{color:#fff; border-bottom-color:var(--tangerine);}
+  nav button.active .tab-no{color:var(--tangerine);}
+
+  main{padding:16px 14px 60px; max-width:920px; margin:0 auto;}
+  .panel{display:none;}
+  .panel.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(5px);} to{opacity:1;transform:none;}}
+
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:16px; margin-bottom:14px; box-shadow:0 2px 10px rgba(40,30,10,.05);
+  }
+  .card-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:12px;}
+  .card-head .eb{font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--teal); font-weight:700; margin-bottom:3px;}
+  .card-head h2{margin:0; font-size:16px; font-weight:800; color:var(--ink);}
+  .card-head .count{font-family:var(--mono); font-size:11px; color:var(--muted); background:var(--sand); padding:3px 8px; border-radius:20px;}
+
+  .search-box{
+    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:10px;
+    font-size:14px; margin-bottom:12px; background:var(--sand); font-family:var(--sans);
+  }
+  .search-box:focus{outline:none; border-color:var(--tangerine); background:#fff;}
+
+  table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  th,td{padding:9px 6px; text-align:left; border-bottom:1px solid var(--line); word-break:keep-all;}
+  th{font-family:var(--mono); background:var(--sand); color:var(--muted); font-size:10px; letter-spacing:.06em; text-transform:uppercase;}
+  .tel{font-family:var(--mono); color:var(--teal); font-weight:700; text-decoration:none; white-space:nowrap; border-bottom:1px dashed var(--teal);}
+  .tel:active{opacity:.5;}
+  .badge{
+    display:inline-block; background:var(--basalt); color:#fff; font-size:10px;
+    padding:2px 7px; border-radius:5px; font-weight:700; margin-left:5px; font-family:var(--mono);
+  }
+  .crown{margin-right:2px;}
+
+  .room-card{
+    position:relative; border:1.5px dashed #d8cba3; border-radius:10px; padding:12px 14px 12px 20px;
+    margin-bottom:12px; background:linear-gradient(180deg,#fffefb,var(--sand));
+  }
+  .room-card::before{
+    content:""; position:absolute; left:9px; top:14px; width:9px; height:9px; border-radius:50%;
+    background:var(--paper); border:1.5px dashed #d8cba3;
+  }
+  .room-card .room-title{font-weight:800; color:var(--ink); font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:8px; font-family:var(--mono);}
+  .room-card .room-title .rtype{font-family:var(--sans); font-weight:600; font-size:11.5px; color:var(--muted);}
+  .room-card .members{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px; font-size:12.5px; transition:.15s;}
+  .chip.leader{border-color:var(--gold); background:#fff6de; font-weight:700;}
+  .chip.match{outline:2px solid var(--tangerine); background:#fff0e6;}
+
+  .tag{display:inline-block; font-family:var(--mono); font-size:10px; font-weight:700; padding:3px 9px; border-radius:5px; letter-spacing:.03em;}
+  .tag.day1{background:#e2f1f7;color:#0b6478;}
+  .tag.day2{background:#e7f5ea;color:#1a7a3e;}
+  .tag.day3{background:#fdece0;color:#c25315;}
+
+  .board{background:var(--basalt); border-radius:14px; padding:16px 16px 8px; margin-bottom:14px; color:#e9e5da;}
+  .board .day-label{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .sched-row{display:flex; gap:12px; padding:9px 0; border-bottom:1px dashed #3a4150; font-size:13px;}
+  .sched-row:last-child{border-bottom:none;}
+  .sched-time{flex:0 0 62px; font-family:var(--mono); color:var(--tangerine); font-size:12.5px; font-weight:700; padding-top:1px;}
+  .sched-content{flex:1; color:#d8d3c6;}
+  .meal .sched-content{color:#ffd9b0;}
+  .meal .sched-content::after{content:" 🍴"; font-size:11px;}
+
+  .note{font-size:11.5px; color:var(--muted); margin-top:10px; line-height:1.7; border-top:1px dashed var(--line); padding-top:8px;}
+  .callout{
+    border-left:3px solid var(--tangerine); background:#fff6ee; padding:10px 12px; border-radius:0 8px 8px 0;
+    font-size:11.5px; color:#8a4a1c; line-height:1.7; margin-top:10px;
+  }
+  .callout.warn{border-left-color:var(--danger); background:#fdeeec; color:#8a2c22;}
+
+  .floor{border:1px solid var(--line); border-radius:12px; margin-bottom:12px; overflow:hidden; background:var(--paper);}
+  .floor-head{background:var(--basalt); color:#fff; font-family:var(--mono); font-weight:700; font-size:12.5px; padding:8px 14px; letter-spacing:.05em;}
+  .floor-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(56px,1fr)); gap:6px; padding:12px;}
+  .room-num{background:var(--sand); border-radius:6px; text-align:center; padding:7px 2px; font-size:11px; font-weight:700; color:var(--muted); font-family:var(--mono); cursor:pointer; user-select:none; transition:.12s;}
+  .room-num:active{transform:scale(.92);}
+  .room-num.assigned{background:var(--tangerine); border:none; color:#fff;}
+  .room-num.teacher{background:var(--basalt); border:none; color:#fff;}
+  .room-num.selected{outline:2.5px solid var(--basalt); outline-offset:1px;}
+
+  .room-info{
+    border:1.5px dashed var(--tangerine); background:#fff8f0; border-radius:10px; padding:12px 14px;
+    margin-bottom:14px; font-size:12.5px; color:var(--ink);
+  }
+  .room-info.empty{color:var(--muted); text-align:center; border-style:dashed; border-color:var(--line); background:var(--sand);}
+  .room-info-title{font-family:var(--mono); font-weight:800; font-size:14px; margin-bottom:8px;}
+  .room-info-empty{color:var(--muted); font-size:12px;}
+  .room-info .members{display:flex; flex-wrap:wrap; gap:6px;}
+  .room-info .chip{background:#fff; border:1px solid var(--line); border-radius:8px; padding:5px 10px; font-size:12.5px;}
+  .room-info .teacher-chip{background:var(--basalt); border-color:var(--basalt); color:#fff; font-weight:700;}
+
+  .day-picker{display:flex; gap:8px; margin-bottom:12px; overflow-x:auto;}
+  .day-pill{
+    flex:1; min-width:110px; padding:10px 6px; border-radius:10px; border:1.5px solid var(--line);
+    background:var(--paper); font-family:var(--mono); font-size:11.5px; font-weight:700; color:var(--muted);
+    cursor:pointer; text-align:center; white-space:nowrap;
+  }
+  .day-pill.day1.active{background:#e2f1f7; border-color:#0b6478; color:#0b6478;}
+  .day-pill.day2.active{background:#e7f5ea; border-color:#1a7a3e; color:#1a7a3e;}
+  .day-pill.day3.active{background:#fdece0; border-color:#c25315; color:#c25315;}
+
+  .class-picker{display:flex; gap:8px; margin-bottom:12px; overflow-x:auto;}
+  .class-pill{
+    flex:0 0 auto; min-width:64px; padding:10px 16px; border-radius:10px; border:1.5px solid var(--line);
+    background:var(--paper); font-family:var(--mono); font-size:12.5px; font-weight:700; color:var(--muted);
+    cursor:pointer; text-align:center; white-space:nowrap;
+  }
+  .class-pill.active{background:var(--basalt); border-color:var(--basalt); color:#fff;}
+
+  .safe-picker{display:flex; gap:8px; margin-bottom:12px; overflow-x:auto; flex-wrap:wrap;}
+  .safe-pill{
+    flex:0 0 auto; padding:9px 13px; border-radius:20px; border:1.5px solid var(--line);
+    background:var(--paper); font-size:12.5px; font-weight:700; color:var(--muted);
+    cursor:pointer; white-space:nowrap;
+  }
+  .safe-pill.active{background:var(--basalt); border-color:var(--basalt); color:#fff;}
+  .safe-list{font-size:13px; line-height:2; margin:0; padding:0 0 0 20px;}
+  .safe-list li{margin-bottom:2px;}
+
+  .grid2{display:grid; grid-template-columns:1fr; gap:12px;}
+  @media(min-width:560px){.grid2{grid-template-columns:1fr 1fr;}}
+  .grid3{display:grid; grid-template-columns:1fr; gap:12px;}
+  @media(min-width:700px){.grid3{grid-template-columns:1fr 1fr 1fr;}}
+
+  .flow{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12px; margin:10px 0; font-family:var(--mono);}
+  .flow .step{background:var(--sand); padding:7px 11px; border-radius:8px; font-weight:700; color:var(--ink); border:1px solid var(--line);}
+  .flow .arrow{color:var(--muted);}
+
+  .shift{display:flex; gap:10px; margin-bottom:8px; flex-wrap:wrap;}
+  .shift .box{flex:1; min-width:140px; border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--sand);}
+  .shift .box b{display:block; color:var(--ink); font-size:12px; margin-bottom:6px; font-family:var(--mono);}
+
+  .vendor-row{padding:10px 0; border-bottom:1px dashed var(--line);}
+  .vendor-row:last-child{border-bottom:none;}
+  .vendor-row .vname{font-weight:700; font-size:13.5px;}
+  .vendor-row .vinfo{font-size:11.5px; color:var(--muted); margin-top:3px;}
+
+  .site-card{border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-bottom:14px; background:var(--paper);}
+  .site-card .site-title{background:var(--basalt); color:#fff; font-weight:800; font-size:13.5px; padding:9px 14px;}
+  .site-card .site-body{padding:12px 14px; font-size:12.5px; line-height:1.75; color:#3a3530;}
+
+  .bus-card{border:1.5px solid var(--line); border-radius:12px; padding:14px; background:linear-gradient(180deg,#fffefb,var(--sand));}
+  .bus-card .btitle{font-family:var(--mono); font-weight:800; font-size:15px; color:var(--ink); display:flex; align-items:center; justify-content:space-between;}
+  .bus-card .bmeta{font-family:var(--mono); font-size:10.5px; color:var(--muted); margin-top:2px;}
+  .bus-card .bcap{font-size:11.5px; color:var(--muted); margin:8px 0 4px;}
+  .bus-card .bassign{font-weight:700; font-size:13px;}
+
+  h3.sec{font-size:12.5px; font-family:var(--mono); color:var(--ink); letter-spacing:.02em; margin:18px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+  h3.sec:first-child{margin-top:0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow"><span class="dot"></span>TEACHER FIELD GUIDE · 기안용 계획서 반영</div>
+  <h1>2026학년도 부산디지털고등학교<br>2학년 현장체험학습(제주)</h1>
+  <div class="pass-route">
+    <span class="city">BUSAN</span>
+    <span class="line"></span>
+    <span class="plane">✈</span>
+    <span class="line"></span>
+    <span class="city">JEJU</span>
+  </div>
+  <div class="pass-meta">
+    <span>DATE <b>2026.09.16–09.18</b></span>
+    <span>DURATION <b>2박 3일</b></span>
+    <span>PAX <b>학생93 · 교직원9 (계102)</b></span>
+    <span>숙소 <b>제주파크선샤인 064-766-1011</b></span>
+  </div>
+</header>
+<div class="tear"></div>
+
+<nav id="tabbar"></nav>
+<main id="main"></main>
+
+<script>
+/* ============ 원본 데이터 ============ */
+
+// 반별 명단 (현재는 2반만 확보됨 — 다른 반 명단이 들어오면 studentsByClass에 같은 형식으로 추가)
+const studentsByClass = {
+ "1반": [
+  {no:1, name:"강현욱", stu:"010-3137-6836", dad:"", mom:"", bd:"2009-02-16", role:""},
+  {no:2, name:"김민서", stu:"010-6871-5025", dad:"010-3885-1978", mom:"010-4560-6076", bd:"2009-12-18", role:""},
+  {no:3, name:"민태준", stu:"010-5340-9769", dad:"010-7160-9769", mom:"", bd:"2009-11-23", role:""},
+  {no:4, name:"박지훈", stu:"010-5518-6733", dad:"010-2847-2720", mom:"010-9512-6733", bd:"2009-08-11", role:""},
+  {no:5, name:"손상원", stu:"010-9641-0036", dad:"010-7650-0036", mom:"", bd:"2009-05-01", role:""},
+  {no:6, name:"양준우", stu:"010-3940-9375", dad:"010-3878-9375", mom:"", bd:"2009-01-10", role:""},
+  {no:7, name:"오우철", stu:"010-4241-3801", dad:"010-3569-3801", mom:"010-3825-3805", bd:"2009-01-21", role:""},
+  {no:8, name:"이나래", stu:"010-2291-5563", dad:"010-2078-5563", mom:"", bd:"2009-05-20", role:""},
+  {no:9, name:"이동건", stu:"010-3078-2627", dad:"010-2778-2627", mom:"", bd:"2009-12-08", role:""},
+  {no:10, name:"이희연", stu:"010-8566-7164", dad:"010-8569-7164", mom:"", bd:"2009-12-22", role:""},
+  {no:11, name:"장민준", stu:"010-3413-5877", dad:"010-5749-5877", mom:"", bd:"2009-08-03", role:""},
+  {no:12, name:"정하율", stu:"010-3841-1057", dad:"010-3834-1057", mom:"", bd:"2009-05-29", role:""},
+  {no:13, name:"정한솔", stu:"010-3431-3714", dad:"010-2806-3542", mom:"010-2564-3714", bd:"2009-05-07", role:""},
+  {no:14, name:"최은혜", stu:"010-2085-1546", dad:"010-8955-1546", mom:"010-5696-1546", bd:"2009-05-20", role:""},
+  {no:15, name:"하유정", stu:"010-5401-6350", dad:"010-7674-5374", mom:"", bd:"2009-12-13", role:""}
+ ],
+ "2반": [
+  {no:1, name:"고은성", stu:"010-7920-0025", dad:"010-5702-3302", mom:"010-4390-0022", bd:"2009-04-28", role:""},
+  {no:2, name:"김세은", stu:"010-8242-6786", dad:"010-5205-0763", mom:"010-5528-6786", bd:"2009-08-10", role:""},
+  {no:3, name:"노기민", stu:"010-6768-6533", dad:"010-8757-6533", mom:"010-7560-6533", bd:"2009-07-14", role:"반장"},
+  {no:4, name:"박성빈", stu:"010-4568-8747", dad:"010-6335-6828", mom:"010-4568-0111", bd:"2009-03-06", role:""},
+  {no:5, name:"배소영", stu:"010-8072-5909", dad:"010-2748-9995", mom:"010-3920-1984", bd:"2009-10-28", role:""},
+  {no:6, name:"이승희", stu:"010-2292-7098", dad:"010-2487-7098", mom:"010-7708-7098", bd:"2009-01-12", role:""},
+  {no:7, name:"이윤우", stu:"010-3160-6706", dad:"010-4553-6706", mom:"010-9343-1978", bd:"2009-02-25", role:""},
+  {no:8, name:"이준서", stu:"010-9197-8810", dad:"010-4856-5924", mom:"010-7563-6924", bd:"2009-07-24", role:""},
+  {no:9, name:"장서희", stu:"010-5804-3035", dad:"010-4659-4981", mom:"010-9974-3035", bd:"2009-06-10", role:""},
+  {no:10, name:"정하은", stu:"010-4552-2530", dad:"010-8547-0509", mom:"010-7678-5801", bd:"2009-11-19", role:""},
+  {no:11, name:"조해주", stu:"010-3891-6327", dad:"010-3563-6327", mom:"010-8667-6327", bd:"2009-08-04", role:""},
+  {no:12, name:"최성림", stu:"010-2324-6614", dad:"010-2678-6614", mom:"010-2062-6614", bd:"2009-01-03", role:""}
+ ],
+ "3반": [
+  {no:1, name:"구민우", stu:"010-8209-8453", dad:"010-9876-8879", mom:"010-9615-8879", bd:"2009-09-25", role:""},
+  {no:2, name:"김재윤", stu:"010-5502-4740", dad:"010-7570-4740", mom:"010-9848-4740", bd:"2009-11-12", role:""},
+  {no:3, name:"김태민", stu:"010-4166-6240", dad:"010-7520-6240", mom:"010-4062-6240", bd:"2009-09-07", role:""},
+  {no:4, name:"문성훈", stu:"010-5059-6653", dad:"010-4542-6662", mom:"010-4542-6663", bd:"2009-09-19", role:""},
+  {no:5, name:"심재민", stu:"010-9643-7898", dad:"010-2828-7898", mom:"010-6471-5281", bd:"2009-05-06", role:""},
+  {no:6, name:"안지오", stu:"010-9291-8046", dad:"010-9594-6637", mom:"010-7262-8046", bd:"2009-05-19", role:""},
+  {no:7, name:"이건우", stu:"010-3558-7898", dad:"010-6846-0916", mom:"010-7448-7379", bd:"2009-09-25", role:""},
+  {no:8, name:"이재웅", stu:"010-4846-8045", dad:"010-3841-8045", mom:"010-4853-8045", bd:"2009-01-07", role:""},
+  {no:9, name:"장욱진", stu:"010-4021-5831", dad:"010-9198-0848", mom:"010-4077-5831", bd:"2009-10-19", role:""},
+  {no:10, name:"조우림", stu:"010-2078-2389", dad:"010-6551-2388", mom:"051-4949-2388", bd:"2009-09-30", role:""},
+  {no:11, name:"최나윤", stu:"010-2592-0572", dad:"010-2810-7253", mom:"010-4561-0572", bd:"2009-10-09", role:""},
+  {no:12, name:"최예성", stu:"010-9287-1202", dad:"010-9823-1202", mom:"010-7963-1202", bd:"2009-07-06", role:""},
+  {no:13, name:"황명석", stu:"010-9999-3282", dad:"010-8880-9995", mom:"010-2553-3222", bd:"2009-11-12", role:""},
+  {no:14, name:"이한빈", stu:"010-6597-4072", dad:"010-3933-5518", mom:"", bd:"2009-06-22", role:""}
+ ],
+ "4반": [
+  {no:1, name:"김민수", stu:"010-2406-1530", dad:"010-8233-0717", mom:"010-8731-0721", bd:"2009-05-30", role:""},
+  {no:2, name:"김민승", stu:"010-7653-7564", dad:"010-3336-7564", mom:"010-8386-7564", bd:"2009-05-08", role:""},
+  {no:3, name:"김주영", stu:"010-2710-5813", dad:"010-2734-5813", mom:"", bd:"2009-08-17", role:""},
+  {no:4, name:"김지수", stu:"010-2229-9976", dad:"010-8234-5439", mom:"", bd:"2009-03-09", role:""},
+  {no:5, name:"박서하", stu:"010-8242-9225", dad:"010-9344-9225", mom:"", bd:"2009-07-17", role:""},
+  {no:6, name:"박준우", stu:"010-5625-2165", dad:"010-3980-2165", mom:"010-7661-2365", bd:"2009-09-26", role:""},
+  {no:7, name:"박지후", stu:"010-2031-5778", dad:"010-2289-9827", mom:"010-3621-9827", bd:"2009-06-11", role:""},
+  {no:8, name:"양정모", stu:"010-3687-3994", dad:"010-4166-3994", mom:"010-4122-3994", bd:"2009-05-22", role:""},
+  {no:9, name:"이승범", stu:"010-5891-9567", dad:"010-8783-0831", mom:"010-7277-6854", bd:"2009-07-08", role:""},
+  {no:10, name:"이우진", stu:"010-4321-5260", dad:"010-6717-4321", mom:"010-7475-6716", bd:"2009-07-14", role:""},
+  {no:11, name:"이지선", stu:"010-7589-7762", dad:"010-2740-7765", mom:"010-5593-7765", bd:"2009-09-07", role:""},
+  {no:12, name:"이지환", stu:"010-8119-2917", dad:"010-5781-2917", mom:"", bd:"2009-10-29", role:""},
+  {no:13, name:"이태윤", stu:"010-3107-6569", dad:"010-5017-6569", mom:"010-3877-6569", bd:"2009-05-25", role:""},
+  {no:14, name:"최우진", stu:"010-9303-6830", dad:"010-8502-1642", mom:"010-9300-6830", bd:"2009-10-19", role:""},
+  {no:15, name:"황슬우", stu:"010-9982-7828", dad:"010-8541-7828", mom:"010-9207-8412", bd:"2009-07-31", role:""},
+  {no:16, name:"이한우", stu:"010-8783-4078", dad:"010-3933-5518", mom:"", bd:"2009-06-22", role:""}
+ ],
+ "5반": [
+  {no:1, name:"김강휘", stu:"010-2270-8372", dad:"010-9901-0820", mom:"010-2355-8372", bd:"2009-10-07", role:""},
+  {no:2, name:"김윤석", stu:"010-5501-6421", dad:"010-8108-1990", mom:"010-2345-6420", bd:"2009-05-09", role:""},
+  {no:3, name:"김지훈", stu:"010-5545-8171", dad:"010-8098-7982", mom:"010-5623-8171", bd:"2009-11-06", role:""},
+  {no:4, name:"박명후", stu:"010-3157-3403", dad:"010-3745-4050", mom:"010-3586-9242", bd:"2009-11-04", role:""},
+  {no:5, name:"박영규", stu:"010-9166-5791", dad:"010-6863-5791", mom:"010-5040-5791", bd:"2009-04-29", role:""},
+  {no:6, name:"박은빈", stu:"010-8560-0160", dad:"010-8560-7522", mom:"010-8560-5250", bd:"2009-07-24", role:""},
+  {no:7, name:"안태환", stu:"010-8986-6260", dad:"010-7455-6260", mom:"010-6388-0656", bd:"2009-06-17", role:""},
+  {no:8, name:"윤혜림", stu:"010-6858-7939", dad:"010-3404-7939", mom:"", bd:"2009-09-03", role:""},
+  {no:9, name:"이지훈", stu:"010-8542-7725", dad:"010-6377-2520", mom:"010-4509-5999", bd:"2010-10-24", role:""},
+  {no:10, name:"정지훈", stu:"010-3373-9332", dad:"010-3055-9332", mom:"", bd:"2009-11-05", role:""},
+  {no:11, name:"조민지", stu:"010-9772-1899", dad:"010-2936-1899", mom:"010-5131-7155", bd:"2009-02-26", role:""},
+  {no:12, name:"조상민", stu:"010-2458-2590", dad:"010-4310-2590", mom:"010-3316-4300", bd:"2009-11-18", role:""},
+  {no:13, name:"조혜원", stu:"010-5847-3382", dad:"010-3399-7482", mom:"010-4909-1566", bd:"2009-02-17", role:""},
+  {no:14, name:"차민준", stu:"010-2892-1124", dad:"010-8546-0901", mom:"010-2884-3392", bd:"2009-11-24", role:""},
+  {no:15, name:"최지우", stu:"010-7557-0454", dad:"010-6304-0454", mom:"010-9599-0454", bd:"2009-11-12", role:""}
+ ],
+ "6반": [
+  {no:1, name:"강주빈", stu:"010-7970-1974", dad:"010-4493-6648", mom:"", bd:"01/07 (연도 미기재)", role:""},
+  {no:2, name:"김주원", stu:"010-2868-4448", dad:"010-6876-1149", mom:"", bd:"06/20 (연도 미기재)", role:""},
+  {no:3, name:"김태훈", stu:"010-4850-2504", dad:"010-3489-2504", mom:"010-4160-2504", bd:"11/06 (연도 미기재)", role:""},
+  {no:4, name:"김하윤①", stu:"010-7519-2115", dad:"010-5882-0795", mom:"010-3561-0795", bd:"10/16 (연도 미기재)", role:""},
+  {no:5, name:"김하윤②", stu:"010-3139-7534", dad:"010-4809-7534", mom:"010-7186-7534", bd:"11/10 (연도 미기재)", role:""},
+  {no:6, name:"백영준", stu:"010-7503-4164", dad:"010-8138-7503", mom:"010-4164-7503", bd:"02/17 (연도 미기재)", role:""},
+  {no:7, name:"이승민", stu:"010-4831-9784", dad:"010-4599-2896", mom:"010-5030-9784", bd:"10/16 (연도 미기재)", role:""},
+  {no:8, name:"이예빈", stu:"010-9829-9984", dad:"010-4687-9984", mom:"", bd:"08/25 (연도 미기재)", role:""},
+  {no:9, name:"정기택", stu:"010-8917-7303", dad:"010-2667-1600", mom:"010-8901-7303", bd:"07/11 (연도 미기재)", role:""},
+  {no:10, name:"차은혜", stu:"010-8504-9253", dad:"010-2520-8441", mom:"010-8410-3621", bd:"06/02 (연도 미기재)", role:""},
+  {no:11, name:"최채은", stu:"010-4749-1834", dad:"010-2990-1834", mom:"010-5599-1834", bd:"02/03 (연도 미기재)", role:""},
+  {no:12, name:"한성진", stu:"010-8369-3398", dad:"010-4558-3398", mom:"010-3850-8816", bd:"10/08 (연도 미기재)", role:""},
+  {no:13, name:"HAFEEZ YAQOOB", stu:"010-6847-9827", dad:"010-8686-1948", mom:"", bd:"05/19 (연도 미기재)", role:""},
+  {no:14, name:"장민성", stu:"010-4899-7045", dad:"010-5540-7045", mom:"010-5546-7045", bd:"08/28 (연도 미기재)", role:""}
+ ],
+ "7반": [
+  {no:1, name:"강여진", stu:"010-9866-4484", dad:"010-6555-4484", mom:"010-9929-4484", bd:"2009-08-26", role:""},
+  {no:2, name:"강태양", stu:"010-7630-1350", dad:"010-8542-1350", mom:"", bd:"2009-12-01", role:""},
+  {no:3, name:"김경수", stu:"010-6787-2889", dad:"010-7223-1080", mom:"010-7767-2889", bd:"2008-10-31", role:""},
+  {no:4, name:"김성민", stu:"010-2361-2249", dad:"010-5378-8249", mom:"", bd:"2009-12-16", role:""},
+  {no:5, name:"박지민", stu:"010-7511-5913", dad:"010-4856-5913", mom:"010-6208-5913", bd:"2009-08-03", role:""},
+  {no:6, name:"박지환", stu:"010-3396-7619", dad:"010-4828-7619", mom:"", bd:"2009-09-13", role:""},
+  {no:7, name:"박지후", stu:"010-7249-2688", dad:"010-9766-2688", mom:"", bd:"2009-02-20", role:""},
+  {no:8, name:"박지훈", stu:"010-4183-7276", dad:"010-6713-6298", mom:"", bd:"2009-10-30", role:""},
+  {no:9, name:"성시찬", stu:"010-9328-8015", dad:"010-4542-2422", mom:"", bd:"2009-06-29", role:""},
+  {no:10, name:"오요한", stu:"010-5809-1948", dad:"010-5803-1948", mom:"", bd:"2009-05-08", role:""},
+  {no:11, name:"이동규", stu:"010-3268-7507", dad:"010-9980-7507", mom:"010-2906-7507", bd:"2009-01-25", role:""},
+  {no:12, name:"이만기", stu:"010-8696-6838", dad:"010-2497-6828", mom:"", bd:"2009-07-06", role:""},
+  {no:13, name:"임정민", stu:"010-8266-5244", dad:"010-6737-5244", mom:"010-8261-5244", bd:"2009-10-25", role:""},
+  {no:14, name:"최민철", stu:"010-2022-9314", dad:"010-4175-0877", mom:"010-5025-9314", bd:"2009-09-09", role:""},
+  {no:15, name:"황지민", stu:"010-6297-0835", dad:"010-5014-4998", mom:"010-5231-4998", bd:"2009-07-30", role:""}
+ ]
+};
+
+
+// 참가 현황 (계획서 기준)
+const classStats = [
+ {cls:"1반", cnt:14, teacher:"이용진"},
+ {cls:"2반", cnt:12, teacher:"김원태"},
+ {cls:"3반", cnt:14, teacher:"정승민"},
+ {cls:"4반", cnt:13, teacher:"김태인 (2학년 기획)"},
+ {cls:"5반", cnt:14, teacher:"권순석 (2학년 부장)"},
+ {cls:"6반", cnt:11, teacher:"조민규"},
+ {cls:"7반", cnt:15, teacher:"조희철"}
+];
+
+// 요보호자 명단 (건강 특이사항 - 안전지도용, 취급 주의)
+const specialCare = [
+ {cls:"1반", name:"장○준", reason:"빈혈", note:"고산소 요구 활동 주의"},
+ {cls:"1반", name:"정○율", reason:"알레르기비염(집먼지·진드기)", note:"고산소 요구 활동 주의"},
+ {cls:"2반", name:"장○희", reason:"뇌전증", note:"인제대백병원 약물치료 · 뇌압상승주의 · 무리한 활동 및 충격주의"},
+ {cls:"4반", name:"김○승", reason:"빈혈/기립성저혈압", note:"고산소 요구 활동 주의"},
+ {cls:"4반", name:"김○수", reason:"알레르기비염(집먼지·꽃가루)", note:"고산소 요구 활동 주의"},
+ {cls:"4반", name:"양○모", reason:"피부묘기증", note:"물리적 자극 최소화"},
+ {cls:"7반", name:"임○민", reason:"심장판막수술", note:"치료종료 · 고산소 요구 활동 주의 · 물리적 자극 최소화"},
+ {cls:"7반", name:"성○찬", reason:"혈액암", note:"감염성 질환 주의"}
+];
+
+// 업무연락망
+const workContacts = {
+  "학교 담당교원 · 인솔자": [
+    {name:"최준건", role:"교감 · 인솔 책임자", tel:"010-2853-1601"},
+    {name:"김성수", role:"교사 안전요원", tel:"010-9355-6710"},
+    {name:"이용진", role:"1반 담임", tel:"010-5100-8566"},
+    {name:"김원태", role:"2반 담임", tel:"010-5645-7604"},
+    {name:"정승민", role:"3반 담임", tel:"010-9549-8073"},
+    {name:"김태인", role:"4반 담임 · 2학년 기획", tel:"010-8748-3190"},
+    {name:"권순석", role:"5반 담임 · 2학년 부장 · 총괄", tel:"010-7594-2721"},
+    {name:"조민규", role:"6반 담임", tel:"010-7132-6457"},
+    {name:"조희철", role:"7반 담임", tel:"010-5500-1009"},
+    {name:"안창모", role:"안전요원 (주간)", tel:"010-2582-4226"},
+    {name:"강용준", role:"안전요원 (주간)", tel:""},
+    {name:"미정", role:"안전요원 (야간) × 4", tel:""}
+  ],
+  "학교 · 교육청 보고라인": [
+    {name:"학교 교무실", role:"부산디지털고", tel:"051-460-0200"},
+    {name:"부산광역시 학교안전총괄과", role:"사무관", tel:"051-860-0501"},
+    {name:"학교안전총괄과", role:"장학사 · 사고발생 시 1차 접수처", tel:"051-860-0502"},
+    {name:"시교육청 당직실", role:"야간 보고", tel:"051-860-0101"}
+  ],
+  "여행사 · 현지 협력업체": [
+    {name:"제주파크선샤인", role:"숙소", tel:"064-766-1011"},
+    {name:"그린고속관광㈜", role:"차량 (전세버스 3대)", tel:""},
+    {name:"제주항공", role:"탑승 항공사", tel:""}
+  ],
+  "인근 지구대": [
+    {name:"제주동부경찰서 조천파출소", role:"제주시 조천읍 신북로 265", tel:"064-796-3112"},
+    {name:"제주서귀포경찰서 중문파출소", role:"서귀포시 천제연로 167-1", tel:"064-738-0112"},
+    {name:"제주서부경찰서 노형지구대", role:"제주시 광평동로 4", tel:"064-746-9549"}
+  ],
+  "응급 의료기관": [
+    {name:"한국병원", role:"제주시 서광로 193 · 응급실·엠뷸런스 有", tel:"064-750-0119"},
+    {name:"제주대학교병원", role:"제주시 아란13길 15 · 응급실·엠뷸런스 有", tel:"064-717-1903"},
+    {name:"한라병원", role:"제주시 도령로 65 · 응급실·엠뷸런스 有", tel:"064-740-5157"},
+    {name:"중앙병원", role:"제주시 월랑로 91 · 응급실·엠뷸런스 有", tel:"064-720-7777"},
+    {name:"한마음병원", role:"제주시 연신로 52 · 응급실·엠뷸런스 有", tel:"064-750-9119"},
+    {name:"서귀포의료원", role:"서귀포시 장수로 47 · 응급실·엠뷸런스 有", tel:"064-730-3109"},
+    {name:"제주국제공항의원", role:"제주시 공항로 2", tel:"064-797-2595"}
+  ]
+};
+
+// 수학여행 업무분장
+const dutyAssign = [
+ {who:"교감", job:"인솔 책임 — 체험학습 전반"},
+ {who:"권순석", job:"총괄 — 일정 계획 총 진행 (협조: 각 담임)"},
+ {who:"각 반 담임", job:"안전 및 생활지도 — 차량 발착 통제, 제반 이상 유무 점검"},
+ {who:"권순석 · 김태인", job:"계획·진행 — 계획 및 사전 준비, 시간 운영"},
+ {who:"이용진 · 조민규 · 조희철", job:"집합 및 질서 — 정렬·질서 유지, 안전사고 예방"},
+ {who:"각 반 담임", job:"식사 지도 — 위생 점검, 식사 조 운영, 식당 내 질서"},
+ {who:"권순석 · 김태인", job:"방송 — 방송 장비 확인"},
+ {who:"김원태 · 정승민", job:"위생 지도 — 약품 구입·관리, 환자 발생 시 조치"},
+ {who:"각 반 담임", job:"사진촬영 및 자연보호 — 자연 훼손 방지, 뒷정리"},
+ {who:"권순석", job:"섭외 — 관공서 등 필요 접촉 활동"},
+ {who:"김태인", job:"경리 — 각종 경비 및 관계 기록 유지"},
+ {who:"각 반 담임", job:"준비 — 버스 조 편성, 방 인원 편성, 오락 지도"},
+ {who:"권순석", job:"소감문 작성 지도 — 2학년 조례시간 활용"},
+ {who:"마○환 · 손○원 · 이○민", job:"잔류학생 지도 — 생활지도 및 학습활동 지도"}
+];
+
+// 일정표 (학교 공식 계획서 기준)
+const itinerary = [
+ {day:"DAY 1 · 09.16 (수)", cls:"day1", items:[
+   {t:"06:30", c:"김해공항 2층(국내선) 집결"},
+   {t:"06:30", c:"항공수속 및 탑승"},
+   {t:"08:05", c:"부산 출발 → 제주 도착 (제주항공)"},
+   {t:"09:30", c:"4.3평화공원 (단체사진)"},
+   {t:"12:00", c:"중식: 참더덕 흑돼지 - 돼지주물럭구이(리필)", meal:true},
+   {t:"13:30", c:"다이나믹메이즈 (레벨2 포함)"},
+   {t:"15:30", c:"천지연폭포 (단체사진)"},
+   {t:"16:30", c:"이동"},
+   {t:"17:30", c:"석식: 상효원 - 한식뷔페", meal:true},
+   {t:"18:30", c:"호텔 도착 및 객실 배정"},
+   {t:"19:30", c:"자유시간"},
+   {t:"21:30", c:"인원 점검 및 취침 점호"}
+ ]},
+ {day:"DAY 2 · 09.17 (목)", cls:"day2", items:[
+   {t:"07:00", c:"기상 및 조식"},
+   {t:"09:00", c:"숙소 출발 및 981파크 이동"},
+   {t:"10:00", c:"981파크 패키지 (레이싱2회, 스포츠랩3회)"},
+   {t:"12:30", c:"중식: 탑모라키친", meal:true},
+   {t:"14:00", c:"이동"},
+   {t:"14:30", c:"제주 아트서커스"},
+   {t:"16:30", c:"제트보트 체험"},
+   {t:"18:00", c:"석식: 무송 바베큐", meal:true},
+   {t:"19:00", c:"숙소 - 레크레이션 진행"},
+   {t:"22:00", c:"인원 점검 및 취침 점호"}
+ ]},
+ {day:"DAY 3 · 09.18 (금)", cls:"day3", items:[
+   {t:"07:00", c:"기상 및 조식"},
+   {t:"08:30", c:"이동"},
+   {t:"09:30", c:"아르떼뮤지엄 (단체사진)"},
+   {t:"11:30", c:"중식: 면공장 (고기국수 외)", meal:true},
+   {t:"12:30", c:"이호테우해변 (우천시 국립제주박물관)"},
+   {t:"13:50", c:"이동"},
+   {t:"14:00", c:"제주 전통시장 탐방(동문시장) · 온누리상품권 1만원 지급", meal:true},
+   {t:"16:20", c:"공항 출발"},
+   {t:"16:30", c:"항공 수속 및 탑승"},
+   {t:"18:40", c:"제주 출발 → 부산 도착 (제주항공)"}
+ ]}
+];
+
+// 급식(식당) 계획표
+const mealPlan = {
+  days: ["09/16 (수)", "09/17 (목)", "09/18 (금)"],
+  rows: [
+   {meal:"점심", places:["참더덕 흑돼지","탑모라키친","면공장"]},
+   {meal:"저녁", places:["상효원","무송 바베큐","동문시장(간편식)"]},
+   {meal:"아침", places:["-","숙소 식당","숙소 식당"]}
+  ]
+};
+const mealOrder = [
+  "09/16(수) 점심·저녁 : 1반부터 순서대로 (지도: 이용진, 김원태)",
+  "09/17(목) 아침·점심 : 3반부터 순서대로 (지도: 정승민, 김태인)",
+  "09/17(목) 저녁·09/18(금) 아침 : 5반부터 순서대로 (지도: 권순석, 조민규)",
+  "09/18(금) 점심 : 7반부터 순서대로 (지도: 조희철, 김성수)"
+];
+
+// 체험 장소 소개 (계획서 원문 요약)
+const sites = [
+ {name:"4.3 평화공원 · 평화기념관", body:"제주4.3 희생자를 추모하고 사건의 역사적 의미를 되새기기 위해 조성된 공간. 4.3평화기념관, 위령제단, 위령탑, 봉안관 등 추모·기록 시설이 있으며 사건의 배경과 전개, 희생자 이야기, 진상 규명 과정을 전시로 살펴볼 수 있다. 제주시 봉개동 소재."},
+ {name:"다이나믹메이즈", body:"서귀포시 표선면의 실내 미션형 미로 체험 시설. 날씨와 무관하게 팀을 이뤄 '화산섬의 비밀'을 파헤치는 액티비티로, 총 15개 스테이지(빅볼 통과·거울 미로·벽 타기·밴드 탈출 등)를 협동해서 통과한다. (레벨2 포함)"},
+ {name:"9.81 파크", body:"중력가속도(9.81m/s²)만으로 즐기는 다운힐 레이싱과 업힐 레이싱. 자체 개발 GR 차량과 편경사·커브가 반영된 트랙에서 레이싱을 즐기며, 앱 연동으로 기록·영상 확인이 가능하다. (레이싱2회, 스포츠랩3회 패키지)"},
+ {name:"제주 아트서커스 & 제트보트", body:"아트서커스 — 빛의 예술과 음악, 화려한 안무가 어우러진 서커스쇼. 제트보트 체험 — 제주 중문의 절경을 무대로 한 스릴 넘치는 해상 레저로, 뉴질랜드에서 직수입한 검증된 보트로 안전과 스릴을 동시에 제공."},
+ {name:"아르떼뮤지엄 & 제주동문시장", body:"아르떼뮤지엄 — 제주 애월의 옛 공장을 업사이클링한 국내 최대 규모 몰입형 미디어아트 전시관(약 1,400평, 16개 전시). 제주동문시장 — 감귤·토산품·수산물 등을 갖춘 우수시장으로 오메기떡·빙떡 등 먹거리도 즐길 수 있다."}
+];
+
+// 버스 배정 (학교 공식)
+const buses = [
+  {no:"1호차", classes:"1·2·5반", detail:"1반14 · 2반12 · 5반5 = 31명", teacher:"이용진, 김원태, 권순석", extra:"보조탑승자: 안전요원", total:"35명"},
+  {no:"2호차", classes:"3·4·5반", detail:"3반14 · 4반13 · 5반4 = 31명", teacher:"정승민, 김태인", extra:"보조탑승자: 교감", total:"34명"},
+  {no:"3호차", classes:"6·7·5반", detail:"6반11 · 7반15 · 5반5 = 31명", teacher:"조민규, 조희철", extra:"보조탑승자: 교사요원·안전요원", total:"35명"}
+];
+
+// 객실 타입 요약 (숙소 공식 배정 기준)
+const roomTypes = [
+ {type:"SPT", qty:14, guests:28, note:"3층(남학생·남교사), 4층(남교사)"},
+ {type:"SPD", qty:21, guests:42, note:"3층(남학생), 4층(남교사)"},
+ {type:"PTW", qty:10, guests:26, note:"2층(여교사·여학생)"},
+ {type:"PTS", qty:3, guests:9, note:"3층(남학생·남교사)"},
+ {type:"HSS", qty:1, guests:3, note:"3층(남학생·남교사)"}
+];
+
+// 실제 숙소 객실 배정표 (학교 제공 이미지 기준, 2026.09 확정본)
+// 교사 객실 배정 (기안용 문서 확인)
+const teacherRooms = [
+ {roomNo:"234", teacher:"최준건 (교감)"},
+ {roomNo:"235", teacher:"김성수 (교사 안전요원)"},
+ {roomNo:"236", teacher:"김태인 (4반 담임)"},
+ {roomNo:"331", teacher:"김원태 (2반 담임)"},
+ {roomNo:"332", teacher:"조희철 (7반 담임)"},
+ {roomNo:"438", teacher:"권순석 (5반 담임)"},
+ {roomNo:"439", teacher:"이용진 (1반 담임)"},
+ {roomNo:"440", teacher:"조민규 (6반 담임)"},
+ {roomNo:"441", teacher:"정승민 (3반 담임)"}
+];
+
+// 학생 방배정 — 최신 게시용/기안용 문서 기준 재구성(93명 전원 배정 확인됨: 아래 인원 합계가 93명과 정확히 일치)
+const roomExamples = [
+ {roomNo:"237", floor:"2층", members:["김주영","윤혜림","이예빈"]},
+ {roomNo:"238", floor:"2층", members:["김하윤①","최채은","차은혜"]},
+ {roomNo:"239", floor:"2층", members:["조민지","박명후","안지오"]},
+ {roomNo:"240", floor:"2층", members:["노기민","장서희","김지수"]},
+ {roomNo:"241", floor:"2층", members:["최나윤","김세은","조혜원"]},
+ {roomNo:"242", floor:"2층", members:["이나래","배소영"]},
+ {roomNo:"243", floor:"2층", members:["강여진","임정민","김하윤②"]},
+ {roomNo:"245", floor:"2층", members:["이희연","최은혜","하유정","정하은"]},
+ {roomNo:"311", floor:"3층", members:["김민승","박준우","양정모"]},
+ {roomNo:"312", floor:"3층", members:["구민우","이재웅"]},
+ {roomNo:"313", floor:"3층", members:["박지민","이동규"]},
+ {roomNo:"314", floor:"3층", members:["김성민","박지후(7반)"]},
+ {roomNo:"315", floor:"3층", members:["박영규","정지훈"]},
+ {roomNo:"316", floor:"3층", members:["이한빈","최예성"]},
+ {roomNo:"317", floor:"3층", members:["이지훈","조상민"]},
+ {roomNo:"318", floor:"3층", members:["이태윤","황슬우","김민수"]},
+ {roomNo:"319", floor:"3층", members:["박지후(4반)","최우진","이승범"]},
+ {roomNo:"320", floor:"3층", members:["장민준","박지훈"]},
+ {roomNo:"321", floor:"3층", members:["김강휘","안태환"]},
+ {roomNo:"322", floor:"3층", members:["장욱진","황명석"]},
+ {roomNo:"323", floor:"3층", members:["심재민","김재윤"]},
+ {roomNo:"324", floor:"3층", members:["조우림","문성훈"]},
+ {roomNo:"325", floor:"3층", members:["이승민","한성진"]},
+ {roomNo:"326", floor:"3층", members:["백영준","김주원"]},
+ {roomNo:"327", floor:"3층", members:["강현욱","고은성"]},
+ {roomNo:"333", floor:"3층", members:["정기택","김태훈"]},
+ {roomNo:"334", floor:"3층", members:["차민준","최지우"]},
+ {roomNo:"335", floor:"3층", members:["김윤석","김지훈"]},
+ {roomNo:"336", floor:"3층", members:["강태양","성시찬"]},
+ {roomNo:"337", floor:"3층", members:["김경수","박지환"]},
+ {roomNo:"338", floor:"3층", members:["이우진","이지환"]},
+ {roomNo:"339", floor:"3층", members:["김민서","정하율"]},
+ {roomNo:"340", floor:"3층", members:["정한솔","민태준"]},
+ {roomNo:"341", floor:"3층", members:["이승희","조해주"]},
+ {roomNo:"342", floor:"3층", members:["이윤우","이준서"]},
+ {roomNo:"343", floor:"3층", members:["박성빈","최성림"]},
+ {roomNo:"345", floor:"3층", members:["박지훈","오요한","이만기"]},
+ {roomNo:"442", floor:"4층", members:["김태민","이건우"]},
+ {roomNo:"443", floor:"4층", members:["최민철","황지민"]},
+ {roomNo:"445", floor:"4층", members:["이동건","양준우","손상원"]}
+];
+
+// 숙소 배치도 (파크선샤인 제주 층별 요약)
+const floors = [
+ {name:"2F · GARDEN / OCEAN", rooms:["220","219","218","217","216","215","214","213","212","211","234","235","236","237","238","239","240","241","242","243","245"], assigned:["237","238","239","240","241","242","243","245"]},
+ {name:"3F · MOUNTAIN / OCEAN", rooms:["320","319","318","317","316","315","314","313","312","311","321","322","323","324","325","326","327","331","332","333","334","335","336","337","338","339","340","341","342","343","345"], assigned:["311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","333","334","335","336","337","338","339","340","341","342","343","345"]},
+ {name:"4F · MOUNTAIN / OCEAN", rooms:["420","419","418","417","416","415","414","413","412","411","421","422","423","424","425","426","427","431","432","433","434","435","436","437","438","439","440","441","442","443","445"], assigned:["442","443","445"]}
+];
+
+// 야간 생활지도 순찰조 편성
+const patrol = [
+ {night:"첫째 날 (9/16→17)", shifts:[
+   {t:"22:00~01:00", who:"교감, 권순석"},
+   {t:"01:00~04:00", who:"이용진, 김원태"},
+   {t:"04:00~07:00", who:"김태인, 정승민"},
+   {t:"07:00~09:00", who:"조민규, 조희철"}
+ ]},
+ {night:"둘째 날 (9/17→18)", shifts:[
+   {t:"22:00~01:00", who:"김성수, 권순석"},
+   {t:"01:00~04:00", who:"이용진, 김원태"},
+   {t:"04:00~07:00", who:"김태인, 정승민"},
+   {t:"07:00~09:00", who:"조민규, 조희철"}
+ ]}
+];
+
+// 시간외 근무 지도내용
+const overtime = [
+ {date:"9/16(수)", time:"16:30~24:00", job:"식사지도, 질서지도, 취침지도", who:"담임 및 교사요원"},
+ {date:"9/17(목)", time:"16:30~24:00", job:"기상 및 아침식사지도, 차량질서지도", who:"담임 및 교사요원"},
+ {date:"9/18(금)", time:"04:00~08:00", job:"인원점검 및 식사지도, 차량질서지도", who:"담임 및 교사요원"}
+];
+
+// 안전교육자료 (학교 제공 「현장체험학습 안전교육자료」 1·2 요약)
+const teacherSafety = {
+ "차량·이동안전": [
+  "출발 전 전 좌석 안전띠 작동 확인, 목적지까지 착용 유지 지도",
+  "승하차는 인솔자가 먼저 내려 위험요소(후진차량 등) 확인 후 진행",
+  "휴게소는 이동구간·화장실/매점 구역·집결장소를 명확히 안내",
+  "점호 후 인원 불일치 시 즉시 출발 중단, 안전한 곳에서 재확인",
+  "교통사고 발생 시: 119·112 즉시 신고 → 동료 인솔자·학교장·교육청 보고 → 보호자 연락",
+  "전복·추락·침수 시 비상탈출용 망치로 유리창 파손 후 신속 대피, 최종 탑승인원 재확인",
+  "멀미약 사전 복용 확인, 위생봉투 비치"
+ ],
+ "항공기 탑승": [
+  "국내선은 이륙 1시간 전 공항 도착 원칙",
+  "탑승 전 학생증 등 신원확인 서류와 항공권을 각자 소지하도록 지도",
+  "보안검색·수하물 위탁 절차를 사전에 안내하여 지체 방지",
+  "이착륙 시 안전벨트 착용, 테이블 정리, 등받이 세우기 확인",
+  "비상시 소지품에 집착하지 않고 신속히 대피하도록 사전교육",
+  "인솔교사는 탑승구 앞 집결 및 인원 확인 후 탑승 유도"
+ ],
+ "숙소·화재안전": [
+  "입소 전 숙소 안전 위해요소(베란다 등) 직접 점검 및 표지 요청",
+  "등록 정원과 실제 배치 인원 일치 여부 확인",
+  "비상탈출로·완강기 위치를 교사가 먼저 숙지",
+  "화재 시: 낮은 자세 + 젖은 수건으로 코·입 막고 계단 이용(엘리베이터 금지)",
+  "취침 시간 이후 교사의 객실 무단 출입 자제(비상 상황 제외)",
+  "불법촬영 예방: 커튼·블라인드 활용 지도, 발견 시 만지지 말고 즉시 신고하도록 사전교육",
+  "야간 마스터키 관리 및 안전요원 위치 학생들에게 공지"
+ ],
+ "식사·위생": [
+  "식당 위생 상태·식단표 준수 여부를 식사 전 확인",
+  "식품 알레르기 학생 사전 파악 후 대체식단 요구",
+  "식중독 의심 증상(구토·설사·복통) 시 의무실 이송, 수분 보충",
+  "동일 증세 의심환자 2명 이상 발생 시 즉시 보건소·교육지원청 신고",
+  "원인 의심 음식은 모두 수거·보관(보관식 확인)",
+  "교사와 학생은 동일 식단으로 식사"
+ ],
+ "체험활동별 안전": [
+  "전시·공연(아트서커스·아르떼뮤지엄): 대피로 사전 확인, 학급 단위 임장지도, 좁은 공간 위주 관람 지양",
+  "수상활동(제트보트): 구명조끼 착용 상태 확인, 수상안전요원 배치 확인, 인근 의료시설 위치 숙지",
+  "레저형 체험(9.81파크 등): 키·연령·건강상태 이용기준 확인, 안전바/벨트 착용, 탑승 중 기립·촬영 금지",
+  "다중이용시설(동문시장 등): 2인 1조 이동, 이탈 금지구역 사전 안내, 낯선 사람 접촉 시 즉시 신고 지도"
+ ],
+ "응급처치 핵심": [
+  "심폐소생술: 반응·호흡 확인 → 119신고·제세동기 요청 → 분당 100~120회 가슴압박",
+  "벌쏘임: 침 제거 후 찬물찜질, 전신 알레르기 반응 시 즉시 병원 이송",
+  "골절·탈구: 부목으로 고정 후 병원 이송, 임의로 교정하지 않음",
+  "코피: 고개 숙이고 콧망울 10분 이상 압박, 30분 이상 지속 시 병원",
+  "화상: 찬물로 충분히 식힌 후 이송, 물집을 터뜨리지 않음",
+  "일사병: 시원한 곳으로 옮겨 다리를 높이고 수분·이온음료 섭취",
+  "추락사고: 머리 충격 의심 시 움직이지 않게 하고 즉시 119 신고"
+ ],
+ "성범죄·학교폭력·도박 예방": [
+  "입소 전 학생·인솔교원 대상 성범죄 예방교육 실시",
+  "동의 없는 신체접촉·촬영·유포는 모두 성폭력에 해당함을 사전 고지",
+  "피해 발생 시 즉시 신고받고 2차 피해 방지 조치(가해자 격리 등) 실시",
+  "장난이라도 상대를 괴롭히거나 단체채팅방 비방은 학교폭력임을 교육",
+  "숙소 내 화투·카드 등 금전이 걸린 행위, 온라인 베팅 앱 사용 금지 안내",
+  "관련 사안 발생 시 학교폭력 책임교사·성고충상담교사에게 즉시 보고"
+ ],
+ "실종·이탈 및 재난 대응": [
+  "장소 이동·체험 전후·식사 전후 수시 인원 점검",
+  "자유시간 운영 시 활동 가능 구역과 이탈 금지 구역을 명확히 안내",
+  "실종 인지 즉시 이동 중단 → 현장 재점검 → 구역 분담 1차 수색",
+  "장기화 시 112 신고 및 학교장·학부모 상황 공유, 인상착의 신속 공유",
+  "고농도 미세먼지 시 실외 프로그램을 실내 대체 프로그램으로 전환",
+  "자연재난(태풍·호우 등) 예보 시 비상연락망 재확인 및 대피장소 사전 파악"
+ ]
+};
+
+/* ============ 렌더링 ============ */
+
+const tabs = [
+  {id:"students", label:"참가학생", eb:"PASSENGER LIST"},
+  {id:"contacts", label:"업무연락망", eb:"CONTACT DIRECTORY"},
+  {id:"schedule", label:"일정표", eb:"ITINERARY BOARD"},
+  {id:"vendors", label:"체험장소", eb:"SITES DOSSIER"},
+  {id:"bus", label:"버스배정", eb:"COACH · FLIGHT"},
+  {id:"rooms", label:"방배정", eb:"ROOM KEY"},
+  {id:"floorplan", label:"숙소배치도", eb:"FLOOR MAP"},
+  {id:"night", label:"야간지도", eb:"NIGHT WATCH"},
+  {id:"safetyEdu", label:"🛟 안전교육자료", eb:"SAFETY MANUAL"}
+];
+
+const tabbar = document.getElementById('tabbar');
+const main = document.getElementById('main');
+let currentDay = 0;
+let currentClass = Object.keys(studentsByClass)[0];
+let currentSafetyEdu = Object.keys(teacherSafety)[0];
+let selectedRoom = null;
+
+tabs.forEach((t,i)=>{
+  const btn = document.createElement('button');
+  btn.innerHTML = `<span class="tab-no">${String(i+1).padStart(2,'0')}</span><span>${t.label}</span>`;
+  btn.dataset.id = t.id;
+  if(i===0) btn.classList.add('active');
+  btn.onclick = ()=> showTab(t.id);
+  tabbar.appendChild(btn);
+});
+
+function telLink(num){
+  if(!num) return '<span style="color:#c9c0ae">-</span>';
+  return `<a class="tel" href="tel:${num.replace(/-/g,'')}">${num}</a>`;
+}
+function eb(id){ return tabs.find(t=>t.id===id).eb; }
+
+function renderStudents(){
+  const classNames = Object.keys(studentsByClass);
+  const roster = studentsByClass[currentClass] || [];
+  let rows = roster.map(s=>`
+    <tr class="stu-row" data-name="${s.name}">
+      <td style="font-family:var(--mono);color:var(--muted);">${String(s.no).padStart(2,'0')}</td>
+      <td>${s.name}${s.role?`<span class="badge">${s.role}</span>`:""}</td>
+      <td>${telLink(s.stu)}</td>
+      <td>${telLink(s.dad)}</td>
+      <td>${telLink(s.mom)}</td>
+      <td style="font-family:var(--mono);font-size:11px;color:var(--muted);">${s.bd}</td>
+    </tr>`).join('');
+  let statRows = classStats.map(c=>`<tr><td>${c.cls}</td><td style="font-family:var(--mono);">${c.cnt}명</td><td>${c.teacher}</td></tr>`).join('');
+  let classPicker = classNames.length>1 ? `<div class="class-picker">${classNames.map(c=>`<button class="class-pill ${c===currentClass?'active':''}" onclick="selectClass('${c}')">${c}</button>`).join('')}</div>` : '';
+  return `
+  <div class="card">
+    <div class="card-head">
+      <div><div class="eb">${eb('students')}</div><h2>참가학생 명단 · 2학년 ${currentClass}</h2></div>
+      <span class="count">${roster.length}명</span>
+    </div>
+    <input class="search-box" id="stuSearch" placeholder="🔍 이름으로 검색 (전체 반 대상)">
+    <div id="searchResults" style="display:none;"></div>
+    <div id="classView">
+    ${classPicker}
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>No</th><th>이름</th><th>학생전화</th><th>부</th><th>모</th><th>생일</th></tr></thead>
+      <tbody id="stuBody">${rows}</tbody>
+    </table>
+    </div>
+    <div class="note">${classNames.length>1?'다른 반이 확보되면 위 탭에서 반을 선택해 볼 수 있습니다.':'다른 반 명단이 확보되면 이 탭에 추가되어 반별로 선택해 볼 수 있습니다.'}</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div><div class="eb">ENROLLMENT</div><h2>전체 참가 현황</h2></div><span class="count">학생 93 · 교사 9 · 계 102</span></div>
+    <table><thead><tr><th>반</th><th>인원</th><th>담임</th></tr></thead><tbody>${statRows}</tbody></table>
+    <p class="note">재적 98명 중 5명 불참(3반 3명·4반 1명·5반 1명)으로 실제 참가 93명. 교원 구성: 교감1 · 담임7 · 생활지도교사1 = 9명.</p>
+    <div class="callout warn">아래 반은 명단 인원과 학교 공식 참가인원이 아직 일치하지 않습니다 — 추가로 빠져야 할 학생을 알려주시면 반영할게요.<br>1반: 명단15 / 참가 14 (+1) · 4반: 명단16 / 참가 13 (+3) · 5반: 명단15 / 참가 14 (+1) · 6반: 명단14 / 참가 11 (+3)</div>
+  </div>`;
+}
+
+function searchAllClasses(q){
+  let matches = [];
+  Object.keys(studentsByClass).forEach(cls=>{
+    studentsByClass[cls].forEach(s=>{
+      if(s.name.includes(q)) matches.push(Object.assign({cls}, s));
+    });
+  });
+  if(matches.length===0){
+    return `<p class="note">"${q}"와(과) 일치하는 학생이 없습니다.</p>`;
+  }
+  let rows = matches.map(s=>`
+    <tr>
+      <td><span class="badge" style="background:var(--teal);">${s.cls}</span></td>
+      <td>${s.name}${s.role?`<span class="badge">${s.role}</span>`:""}</td>
+      <td>${telLink(s.stu)}</td>
+      <td>${telLink(s.dad)}</td>
+      <td>${telLink(s.mom)}</td>
+      <td style="font-family:var(--mono);font-size:11px;color:var(--muted);">${s.bd}</td>
+    </tr>`).join('');
+  return `<div style="overflow-x:auto;"><table>
+    <thead><tr><th>반</th><th>이름</th><th>학생전화</th><th>부</th><th>모</th><th>생일</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
+function renderContacts(){
+  let html = `<div class="card"><div class="card-head"><div><div class="eb">${eb('contacts')}</div><h2>업무연락망</h2></div></div>`;
+  for(const group in workContacts){
+    html += `<h3 class="sec">${group}</h3>`;
+    workContacts[group].forEach(c=>{
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);">
+        <div><div style="font-weight:700;font-size:13.5px;">${c.name}</div><div style="font-size:11px;color:var(--muted);">${c.role}</div></div>
+        <div>${telLink(c.tel)}</div>
+      </div>`;
+    });
+  }
+  html += `<div class="callout warn">사고 발생 시 1차 유선보고: 학교안전총괄과 (근무시 09~18시) → 시교육청 당직실(야간, 051-8600-101/104). 인솔책임자·학교장은 119·1339·112에도 즉시 연락.</div></div>`;
+
+  html += `<div class="card"><div class="card-head"><div><div class="eb">DUTY ROSTER</div><h2>수학여행 업무분장</h2></div></div>`;
+  dutyAssign.forEach(d=>{
+    html += `<div class="vendor-row"><div class="vname">${d.who}</div><div class="vinfo">${d.job}</div></div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function renderSchedule(){
+  let html = `<div class="day-picker">`;
+  itinerary.forEach((day,i)=>{
+    html += `<button class="day-pill ${day.cls} ${i===currentDay?'active':''}" onclick="selectDay(${i})">${day.day}</button>`;
+  });
+  html += `</div>`;
+
+  const day = itinerary[currentDay];
+  html += `<div class="board"><div class="day-label"><span class="tag ${day.cls}">${day.day}</span></div>`;
+  day.items.forEach(it=>{
+    html += `<div class="sched-row ${it.meal?'meal':''}"><div class="sched-time">${it.t}</div><div class="sched-content">${it.c}</div></div>`;
+  });
+  html += `</div>`;
+  html += `<div class="card"><div class="card-head"><div><div class="eb">MEAL PLAN</div><h2>급식(식당) 계획</h2></div></div>
+    <div style="overflow-x:auto;"><table><thead><tr><th></th>${mealPlan.days.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>
+    ${mealPlan.rows.map(r=>`<tr><td style="font-weight:700;">${r.meal}</td>${r.places.map(p=>`<td>${p}</td>`).join('')}</tr>`).join('')}
+    </tbody></table></div>
+    <h3 class="sec">식사 순서(반별 로테이션)</h3>
+    <ul style="font-size:12.5px; line-height:1.9; margin:0 0 0 18px; padding:0;">
+      ${mealOrder.map(m=>`<li>${m}</li>`).join('')}
+    </ul>
+  </div>`;
+  return html;
+}
+
+function renderVendors(){
+  let html = `<div class="card"><div class="card-head"><div><div class="eb">${eb('vendors')}</div><h2>수학여행 체험 장소 소개</h2></div></div>`;
+  sites.forEach(s=>{
+    html += `<div class="site-card"><div class="site-title">${s.name}</div><div class="site-body">${s.body}</div></div>`;
+  });
+  html += `<p class="note">교통: 제주항공(부산 08:05→09:30, 제주 18:40→19:45) · 그린고속관광㈜ 전세버스 3대. 숙소: 제주파크선샤인(064-766-1011).</p></div>`;
+  return html;
+}
+
+function renderBus(){
+  let html = `<div class="card"><div class="card-head"><div><div class="eb">${eb('bus')}</div><h2>버스 배정</h2></div></div><div class="grid2">`;
+  buses.forEach(b=>{
+    html += `<div class="bus-card">
+      <div class="btitle">🚌 ${b.no} <span style="font-family:var(--sans);font-weight:400;font-size:11px;color:var(--muted);">${b.classes}</span></div>
+      <div class="bcap">${b.detail}</div>
+      <div class="bassign">지도교사: ${b.teacher}</div>
+      <div class="bmeta" style="margin-top:6px;">${b.extra} · 총 ${b.total}</div>
+    </div>`;
+  });
+  html += `</div><p class="note">2학년 2반은 1호차(1·2·5반)에 탑승합니다. 5반은 세 버스에 5·4·6명씩 분산 배정.</p></div>`;
+  return html;
+}
+
+function renderRooms(){
+  let html = `<div class="card">
+    <div class="card-head"><div><div class="eb">ROOM TYPES</div><h2>객실 타입 요약 · 제주파크선샤인</h2></div></div>
+    <table><thead><tr><th>타입</th><th>수량</th><th>투숙인원</th><th>비고</th></tr></thead><tbody>
+    ${roomTypes.map(r=>`<tr><td style="font-family:var(--mono);font-weight:700;">${r.type}</td><td>${r.qty}실</td><td>${r.guests}명</td><td>${r.note}</td></tr>`).join('')}
+    </tbody></table>
+  </div>`;
+
+  html += `<div class="card">
+    <div class="card-head"><div><div class="eb">TEACHER ROOMS</div><h2>교사 객실 배정</h2></div></div>
+    <table><thead><tr><th>호실</th><th>교원</th></tr></thead><tbody>
+    ${teacherRooms.map(r=>`<tr><td style="font-family:var(--mono);font-weight:700;">${r.roomNo}</td><td>${r.teacher}</td></tr>`).join('')}
+    </tbody></table>
+    <div class="note">교사 객실을 뺀 학생 전용 객실 배정입니다.</div>
+  </div>`;
+
+  html += `<div class="card">
+    <div class="card-head"><div><div class="eb">CONFIRMED</div><h2>확정 객실 배정표</h2></div><span class="count">${roomExamples.length}실</span></div>
+    <input class="search-box" id="roomSearch" placeholder="🔍 학생 이름으로 방 검색">
+    <div id="roomList">`;
+  roomExamples.forEach(r=>{
+    html += `<div class="room-card room-item" data-members="${r.members.join(',')}">
+      <div class="room-title">${r.roomNo}호<span class="rtype">${r.floor}</span></div>
+      <div class="members">${r.members.map(m=>`<span class="chip mem-chip" data-name="${m}">${m}</span>`).join('')}</div>
+    </div>`;
+  });
+  html += `</div>
+    <div class="note">방배정은 반 구분 없이 섞여서 이뤄졌습니다. 학생 전원(93명) 배정이 확인되었습니다.</div>
+  </div>`;
+  return html;
+}
+
+function renderFloorplan(){
+  let html = `<div class="card"><div class="card-head"><div><div class="eb">${eb('floorplan')}</div><h2>숙소 배치도</h2></div></div>`;
+
+  html += `<div id="roomInfoBox" class="room-info ${selectedRoom?'':'empty'}">`;
+  if(selectedRoom){
+    const ex = roomExamples.find(r=>r.roomNo===selectedRoom);
+    const tr = teacherRooms.find(r=>r.roomNo===selectedRoom);
+    html += `<div class="room-info-title">${selectedRoom}호</div>`;
+    if(ex){
+      html += `<div class="members">${ex.members.map(m=>`<span class="chip">${m}</span>`).join('')}</div>`;
+    } else if(tr){
+      html += `<div class="members"><span class="chip teacher-chip">🧑‍🏫 ${tr.teacher}</span></div>`;
+    } else {
+      html += `<div class="room-info-empty">배정 정보 없음 (미정)</div>`;
+    }
+  } else {
+    html += `👆 호실 번호를 눌러 배정 인원을 확인하세요.`;
+  }
+  html += `</div>`;
+
+  floors.forEach(f=>{
+    html += `<div class="floor"><div class="floor-head">${f.name}</div><div class="floor-grid">`;
+    f.rooms.forEach(rm=>{
+      const assigned = f.assigned && f.assigned.includes(rm);
+      const isTeacher = teacherRooms.some(r=>r.roomNo===rm);
+      const sel = selectedRoom===rm;
+      html += `<div class="room-num ${assigned?'assigned':''} ${isTeacher?'teacher':''} ${sel?'selected':''}" onclick="selectRoom('${rm}')">${rm}</div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `<p class="note">주황색 = 학생 배정 호실, 남색 = 교사 배정 호실. 각 층 프론트 인근에 소화기·비상통로가 표시된 피난 안내도가 게시되어 있습니다.</p></div>`;
+  return html;
+}
+
+function renderNight(){
+  let html = `<div class="card">
+    <div class="card-head"><div><div class="eb">${eb('night')}</div><h2>야간 생활지도 순찰조</h2></div></div>`;
+  patrol.forEach(p=>{
+    html += `<h3 class="sec">${p.night}</h3><div class="grid2">`;
+    p.shifts.forEach(s=>{
+      html += `<div class="shift"><div class="box"><b>${s.t}</b>${s.who}</div></div>`;
+    });
+    html += `</div>`;
+  });
+  html += `<p class="note">매일 밤 야간 안전요원 4명 별도 배치. 업무: 환자 유무 확인, 숙소 주변 순찰, 취침 상태 점검, 이탈 방지, 음주·흡연·고성방가·기물파손 점검, 타 객실 이동 여부 확인.</p></div>`;
+
+  html += `<div class="card"><div class="card-head"><div><div class="eb">OVERTIME</div><h2>시간외 근무 지도내용</h2></div></div>
+   <table><thead><tr><th>날짜</th><th>시간</th><th>내용</th><th>담당</th></tr></thead><tbody>
+   ${overtime.map(o=>`<tr><td>${o.date}</td><td style="font-family:var(--mono);">${o.time}</td><td>${o.job}</td><td>${o.who}</td></tr>`).join('')}
+   </tbody></table></div>`;
+
+  html += `<div class="card">
+    <div class="card-head"><div><div class="eb">SPECIAL CARE</div><h2>요보호자 명단</h2></div></div>
+    <div class="callout warn">건강 특이사항이 있는 학생 명단입니다. 인솔·안전요원 간 공유 후 활동 시 유의해 주세요.</div>
+    <div style="overflow-x:auto;"><table><thead><tr><th>반</th><th>성명</th><th>사유</th><th>유의사항</th></tr></thead><tbody>
+    ${specialCare.map(s=>`<tr><td>${s.cls}</td><td style="font-weight:700;">${s.name}</td><td>${s.reason}</td><td style="color:var(--muted);">${s.note}</td></tr>`).join('')}
+    </tbody></table></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div><div class="eb">EMERGENCY FLOW</div><h2>사고 발생 시 대응 절차</h2></div></div>
+    <div class="flow">
+      <span class="step">사고발생</span><span class="arrow">→</span>
+      <span class="step">응급처치·119/1339/112</span><span class="arrow">→</span>
+      <span class="step">인솔책임자·학교장 보고</span><span class="arrow">→</span>
+      <span class="step">학교안전총괄과 유선보고</span><span class="arrow">→</span>
+      <span class="step">교육감·교육장 보고</span>
+    </div>
+    <h3 class="sec">생활지도 핵심 수칙</h3>
+    <ul style="font-size:12.5px; line-height:1.9; margin:0 0 0 18px; padding:0;">
+      <li>성폭력 예방: 위험 상황 행동요령 숙지, 어둡고 후미진 곳 출입 금지, 취침 전 문단속 철저</li>
+      <li>폭력 예방: 사건 발생 시 즉시 담임 신고, 심한 장난·몸싸움 금지</li>
+      <li>도난 예방: 불필요한 귀중품 미지참, 소지품에 이름 기재, 귀중품은 담임 위탁 보관</li>
+    </ul>
+  </div>`;
+  return html;
+}
+
+function renderSafetyEdu(){
+  const cats = Object.keys(teacherSafety);
+  let html = `<div class="card">
+    <div class="card-head"><div><div class="eb">${eb('safetyEdu')}</div><h2>안전교육자료</h2></div></div>
+    <div class="safe-picker">${cats.map(k=>`<button class="safe-pill ${k===currentSafetyEdu?'active':''}" onclick="selectSafetyEdu('${k}')">${k}</button>`).join('')}</div>
+    <ul class="safe-list">${teacherSafety[currentSafetyEdu].map(i=>`<li>${i}</li>`).join('')}</ul>
+    <p class="note">학교 제공 「현장체험학습 수학여행 안전교육자료」를 이번 일정에 맞게 발췌·요약했습니다. 전체 원문은 학교 배부 자료를 참고해 주세요.</p>
+  </div>`;
+  return html;
+}
+
+const renderers = {
+  students: renderStudents, contacts: renderContacts, schedule: renderSchedule,
+  vendors: renderVendors, bus: renderBus, rooms: renderRooms,
+  floorplan: renderFloorplan, night: renderNight, safetyEdu: renderSafetyEdu
+};
+
+let activeTab = 'students';
+
+function showTab(id){
+  activeTab = id;
+  [...tabbar.children].forEach(b=> b.classList.toggle('active', b.dataset.id===id));
+  main.innerHTML = `<div class="panel active">${renderers[id]()}</div>`;
+  attachSearch(id);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function rerenderPanel(){
+  main.innerHTML = `<div class="panel active">${renderers[activeTab]()}</div>`;
+  attachSearch(activeTab);
+}
+
+function selectDay(i){
+  currentDay = i;
+  rerenderPanel();
+}
+
+function selectClass(cls){
+  currentClass = cls;
+  rerenderPanel();
+}
+
+function selectSafetyEdu(k){
+  currentSafetyEdu = k;
+  rerenderPanel();
+}
+
+function selectRoom(roomNo){
+  selectedRoom = (selectedRoom===roomNo) ? null : roomNo;
+  rerenderPanel();
+}
+
+function attachSearch(id){
+  if(id==='students'){
+    const input = document.getElementById('stuSearch');
+    const resultsBox = document.getElementById('searchResults');
+    const classView = document.getElementById('classView');
+    input.addEventListener('input', ()=>{
+      const q = input.value.trim();
+      if(q===''){
+        resultsBox.style.display = 'none';
+        classView.style.display = '';
+      } else {
+        classView.style.display = 'none';
+        resultsBox.style.display = '';
+        resultsBox.innerHTML = searchAllClasses(q);
+      }
+    });
+  }
+  if(id==='rooms'){
+    const input = document.getElementById('roomSearch');
+    if(!input) return;
+    input.addEventListener('input', ()=>{
+      const q = input.value.trim();
+      document.querySelectorAll('.room-item').forEach(item=>{
+        const members = item.dataset.members.split(',');
+        item.style.display = (q==='' || members.some(m=>m.includes(q))) ? '' : 'none';
+        item.querySelectorAll('.mem-chip').forEach(chip=>{
+          chip.classList.toggle('match', q!=='' && chip.dataset.name.includes(q));
+        });
+      });
+    });
+  }
+}
+
+showTab('students');
+</script>
+</body>
+</html>
