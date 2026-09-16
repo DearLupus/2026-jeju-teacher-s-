@@ -215,6 +215,9 @@
   .bus-clickable:active{transform:scale(.98);}
   .bus-clickable.selected{outline:2.5px solid var(--basalt); outline-offset:1px;}
   .bus-tap-hint{margin-top:8px; font-size:10.5px; font-family:var(--mono); color:var(--tangerine); font-weight:700;}
+  .bus-roster{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line);}
+  .bus-roster-class{font-family:var(--mono); font-weight:800; font-size:12px; color:var(--ink); margin:8px 0 6px;}
+  .bus-roster-class:first-child{margin-top:0;}
 
   h3.sec{font-size:12.5px; font-family:var(--mono); color:var(--ink); letter-spacing:.02em; margin:18px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line);}
   h3.sec:first-child{margin-top:0;}
@@ -909,22 +912,18 @@ function renderBus(){
       <div class="bcap">${b.detail}</div>
       <div class="bassign">지도교사: ${b.teacher}</div>
       <div class="bmeta" style="margin-top:6px;">${b.extra} · 총 ${b.total}</div>
-      <div class="bus-tap-hint">${sel?'▲ 접기':'▼ 학생 명단 보기'}</div>
-    </div>`;
-  });
-  html += `</div>`;
-
-  if(selectedBus && busRosters[selectedBus]){
-    const roster = busRosters[selectedBus];
-    html += `<div class="room-info" style="margin-top:14px;">
-      <div class="room-info-title">${selectedBus} 학생 명단</div>`;
-    for(const cls in roster){
-      html += `<h3 class="sec" style="margin:10px 0 6px;">${cls} (${roster[cls].length}명)</h3>
-        <div class="members">${roster[cls].map(n=>`<span class="chip">${n}</span>`).join('')}</div>`;
+      <div class="bus-tap-hint">${sel?'▲ 접기':'▼ 학생 명단 보기'}</div>`;
+    if(sel && busRosters[b.no]){
+      const roster = busRosters[b.no];
+      html += `<div class="bus-roster">`;
+      for(const cls in roster){
+        html += `<div class="bus-roster-class">${cls} <span style="color:var(--muted);font-weight:400;">(${roster[cls].length}명)</span></div>
+          <div class="members">${roster[cls].map(n=>`<span class="chip">${n}</span>`).join('')}</div>`;
+      }
+      html += `</div>`;
     }
     html += `</div>`;
-  }
-
+  });
   html += `</div>`;
   html += `<div class="card"><p class="note">2학년 2반은 1호차(1·2·5반)에 탑승합니다. 5반은 세 버스에 5·4·5명씩 분산 배정.</p></div>`;
   return html;
@@ -1143,7 +1142,7 @@ const eggMessages = [
 ];
 const egg = document.createElement('div');
 egg.className = 'tangerine-egg';
-egg.textContent = '🍊';
+egg.textContent = '🐴';
 egg.title = '';
 document.body.appendChild(egg);
 
